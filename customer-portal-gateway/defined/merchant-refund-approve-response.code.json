@@ -1,0 +1,74 @@
+{
+	"SUCCESS": {
+		"CODE": 1,
+		"MESSAGE": {
+			"VI": "Thành công",
+			"EN": "Successful"
+		},
+		"STATUS_CODE": 400
+	},
+	"FAILED": {
+		"CODE": 1000,
+		"MESSAGE": {
+			"VI": "Thất bại",
+			"EN": "Process failed"
+		},
+		"STATUS_CODE": 400
+	},
+	"PAYOUT_REQ_ID_MISSING": {
+		"CODE": 1000,
+		"MESSAGE": {
+			"VI": "Thiếu tham số mã yêu cầu hoàn tiền",
+			"EN": "Missing param refundReqId"
+		},
+		"STATUS_CODE": 400
+	},
+	"REFUND_REQ_APPROVED": {
+		"CODE": 1000,
+		"MESSAGE": {
+			"VI": "Yêu cầu hoàn tiền đã được duyệt",
+			"EN": "Refund request was approved"
+		},
+		"STATUS_CODE": 400
+	},
+	"REFUND_CHANNEL_INVALID": {
+		"CODE": 1000,
+		"MESSAGE": {
+			"VI": "Phương thức hoàn tiền không hợp lệ",
+			"EN": "Refund method is invalid"
+		},
+		"STATUS_CODE": 400
+	},
+	"REFUND_REQ_NOT_APPROVED": {
+		"CODE": 1000,
+		"MESSAGE": {
+			"VI": "Yêu cầu hoàn tiền chưa được duyệt",
+			"EN": "Refund request wasn't approved"
+		},
+		"STATUS_CODE": 400
+	},
+	"REFUND_REQ_PROCESSED": {
+		"CODE": 1000,
+		"MESSAGE": {
+			"VI": "Yêu cầu hoàn tiền đã được xử lý",
+			"EN": "Refund request was processed"
+		},
+		"STATUS_CODE": 400
+	},
+	"REFUND_REQUEST_PROCESS_STATE_INVALID": {
+		"CODE": 1000,
+		"MESSAGE": {
+			"VI": "Trạng thái không hợp lệ",
+			"EN": "Status is invalid"
+		},
+		"STATUS_CODE": 400
+	},
+	"REFUND_REQUEST_ACCOUNT_TYPE_MISSING": {
+		"CODE": 1000,
+		"MESSAGE": {
+			"VI": "Thiếu tham số mã yêu cầu hoàn tiền",
+			"EN": "Missing param refundReqId"
+		},
+		"STATUS_CODE": 400
+	}
+}

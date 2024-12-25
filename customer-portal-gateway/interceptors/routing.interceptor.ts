@@ -2,7 +2,8 @@ import _ from "lodash";
 import Moleculer, { LoggerInstance, ServiceBroker } from "moleculer";
 import { ResponseHelper } from "goopay-library/helpers";
 import { RoutingSecurity } from "../security";
-import { RoutingTracking } from "../tracking";
+import {RoutingTracking} from "../tracking";
+import MoleculerError = Moleculer.Errors.MoleculerError;
 
 class RoutingInterceptor {
 	private readonly broker: ServiceBroker;
@@ -34,7 +35,6 @@ class RoutingInterceptor {
 		/** Tracking request */
 		this.tracking.trackingRequest(ctx, route, req, res, this.logger);
 	}
-
 	/** BASE FUNCTIONS PRE-PROCESS RESPONSE
 	 * THIS IS CAN OVERWRITE FROM CHILD SERVICES
 	 */
@@ -42,7 +42,14 @@ class RoutingInterceptor {
 		/** Processing correct format response: { code, data, message } */
 		const response = ResponseHelper.resGateway(data, res);
 		/** Tracking response */
-		this.tracking.trackingResponse(ctx, route, req, res, response, this.logger);
+		this.tracking.trackingResponse(
+			ctx,
+			route,
+			req,
+			res,
+			response,
+			this.logger
+		);
 		return response;
 	}
 
@@ -61,15 +68,13 @@ class RoutingInterceptor {
 		res.setHeader("Content-Type", "application/json; charset=utf-8");
 		if (err && _.isObject(err.message)) {
 			res.statusCode = err.message.code;
-			res.end(JSON.stringify({ code: err.message.code }));
+			res.end(JSON.stringify({code: err.message.code }));
 		} else {
 			res.statusCode = err.code || 501;
-			res.end(
-				JSON.stringify({
-					code: err.code || 501,
-					message: err.type || "SYS_ERR", // Error type is moleculer error object: SERVICE_NOT_AVAILABLE || REQUEST_TIME_OUT ...
-				}),
-			);
+			res.end(JSON.stringify({
+				code: err.code || 501,
+				message: err.type || "SYS_ERR" // Error type is moleculer error object: SERVICE_NOT_AVAILABLE || REQUEST_TIME_OUT ...
+			}));
 		}
 	}
 }

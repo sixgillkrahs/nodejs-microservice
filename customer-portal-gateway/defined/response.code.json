@@ -1,0 +1,47 @@
+{
+  "SUCCESS": {
+    "CODE": 1,
+    "MESSAGE": {
+      "VI": "Thành công",
+      "EN": "Successful"
+    }
+  },
+  "FAILED": {
+    "CODE": 2,
+    "MESSAGE": {
+      "VI": "Thất bại",
+      "EN": "Process failed"
+    }
+  },
+  "ERROR": {
+		"MISSING_PARAM": {
+			"CODE": 1000,
+			"MESSAGE": {
+				"VI": "Thiếu tham số",
+				"EN": "MISSING PARAM"
+			},
+			"STATUS_CODE": 400
+		},
+		"ITEM_NOT_FOUND": {
+			"CODE": 1002,
+			"MESSAGE": {
+				"VI": "Không tìm thấy dữ liệu",
+				"EN": "ITEM NOT FOUND"
+			}
+		},
+		"EXISTED": {
+			"CODE": 1003,
+			"MESSAGE": {
+				"VI": "Dữ liệu đã tồn tại",
+				"EN": "EXISTED DATA"
+			}
+		},
+		"EXCEED_DATE_RANGE_EXPORT": {
+			"CODE": 1104,
+			"MESSAGE": {
+				"VI": "Thời gian không quá 31 ngày.",
+				"EN": "Just only export data in 31 days"
+			}
+		}
+	}
+}

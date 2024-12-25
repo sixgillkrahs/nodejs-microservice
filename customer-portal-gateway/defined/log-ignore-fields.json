@@ -1,0 +1,8 @@
+{
+	"ignoreFields": [
+		"token", "qrCode", "data.qrCode", "password", "confirmPassword",
+		"newPassword", "verifyPassword", "linkedId", "otp", "confirmOtp", "confirmOTP", "linkedId",
+		"data.password", "data.confirmPassword", "data.otp", "data.confirmOTP", "data.confirmOtp",
+		"data.token", "data.linkedId"
+	]
+}

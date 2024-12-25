@@ -1,15 +1,16 @@
 import { Service, ServiceBroker } from "moleculer";
-import mongoose, { Connection } from "mongoose";
 import paginate from "mongoose-paginate-v2";
 import MongoDb from "./dbHandler/mongo";
+import { trackingIn, trackingOut } from "./middlewares";
 import { SVC_ENV } from "./svc-env";
-import { AccountModel } from "./model";
+import { AccountModel } from "./models";
 import { AccountLogic } from "./logic";
 
 const ServiceName = "account-service";
+const ServicePort = 9032;
 
-class AccountService extends Service {
-	private accountLogic: AccountLogic;
+class ConfigService extends Service {
+	private accountModel: AccountModel;
 
 	public constructor(broker: ServiceBroker) {
 		super(broker);
@@ -19,57 +20,66 @@ class AccountService extends Service {
 			name: ServiceName,
 			mixins: [],
 			settings: {
-				port: SVC_ENV.get().PORT,
+				port: ServicePort,
 			},
 			actions: {
 				heathCheck: {
 					desc: "Check service status ready working",
 					handler: (ctx) => "OK",
 				},
-				createAccount: (ctx) => this.accountLogic.createAccount(ctx),
-				getAllAccount: (ctx) => this.accountLogic.getAllAccount(ctx),
+
 				getAccountPaging: (ctx) => this.accountLogic.getAccountPaging(ctx),
+				getAllAccount: (ctx) => this.accountLogic.getAllAccount(ctx),
+				createAccount: (ctx) => this.accountLogic.createAccount(ctx),
 			},
+			events: {},
 			methods: {},
 			created: this.serviceCreated,
 			started: this.serviceStarted,
 			stopped: this.serviceStopped,
+			hooks: {
+				/** Verify all expression before action call */
+				before: {
+					"*": [trackingIn],
+				},
+				/** Verify data return or something jobs after action was called */
+				after: {
+					"*": [trackingOut],
+				},
+			},
 		});
 	}
 
 	private serviceCreated() {
-		this.logger.info(`${ServiceName} created.`);
+		this.logger.info(ServiceName);
 	}
 
-	private serviceStarted(): void {
-		/** Init Dependencies For This Service */
-		this.logger.info(`${ServiceName} started.`);
+	private serviceStarted(): Promise<void> {
+		this.logger.info(ServiceName);
+		return;
 	}
 
-	private serviceStopped(): void {
-		this.logger.info(`${ServiceName} stopped.`);
+	private serviceStopped(): Promise<void> {
+		this.logger.info(ServiceName);
+		return;
 	}
 
 	private initService(): void {
 		const dbHandler = new MongoDb(this.logger);
-		mongoose
-			.connect(SVC_ENV.get().MONGO_URI || "")
-			.then((r) => r)
-			.catch((err) => {
-				this.logger.error(err);
-			});
-		dbHandler.createConnection((err, dbConnection: Connection | null) => {
+		dbHandler.createConnection((err, dbConnection) => {
 			if (err) {
 				this.logger.error(err);
-				throw new Error("Connect to database error, please check MONGO_URI at .run.env");
+				this.stopService(this.broker, "STOP_SERVICE_ERR_CONNECT_DB");
+				return;
 			}
+			/** Init models and install plugins use for model*/
 			const plugins = [paginate];
 			const models = {
 				AccountModel: new AccountModel(this.logger, dbConnection, plugins),
 			};
 			this.accountLogic = new AccountLogic({
 				logger: this.logger,
-				dbConnection: dbConnection,
+				dbConnection,
 				models,
 			});
 		});
@@ -80,6 +90,13 @@ class AccountService extends Service {
 		SVC_ENV.setEnvironmentsFromEnv(this.broker, ServiceName);
 		this.initService();
 	}
+
+	private stopService(broker: ServiceBroker, messageOut: string) {
+		broker
+			.destroyService(broker.services.find((x) => x.name === SVC_ENV.get().SERVICE_NAME))
+			.then(() => broker.logger.fatal(messageOut, SVC_ENV.get().SERVICE_NAME))
+			.catch((stopSvcError) => broker.logger.fatal(stopSvcError));
+	}
 }
 
-export = AccountService;
+export = ConfigService;

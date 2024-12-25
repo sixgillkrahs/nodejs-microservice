@@ -1,5 +1,5 @@
-import { LoggerHelper } from "goopay-library/helpers";
-import { BaseTracking } from "./base.tracking";
+import {LoggerHelper} from "goopay-library/helpers";
+import {BaseTracking} from "./base.tracking";
 
 class RoutingTracking extends BaseTracking {
 	/** TRACKING */
@@ -19,8 +19,7 @@ class RoutingTracking extends BaseTracking {
 				action: req && req.$action ? req.$action.name : "",
 				params: req && req.$params ? req.$params : {},
 				ignoreFields: super.getIgnoreField().ignoreFields,
-				userName:
-					ctx.meta.user && ctx.meta.user.userName ? ctx.meta.user.userName : "GUEST",
+				userName: ctx.meta.user && ctx.meta.user.userName ? ctx.meta.user.userName : "GUEST"
 			};
 			/** Log req */
 			const logAC = LoggerHelper.getFormatLogGwAC(reqObj);
@@ -45,9 +44,8 @@ class RoutingTracking extends BaseTracking {
 				action: req && req.$action ? req.$action.name : "",
 				params: req && req.$params ? req.$params : {},
 				ignoreFields: super.getIgnoreField().ignoreFields,
-				userName:
-					ctx.meta.user && ctx.meta.user.userName ? ctx.meta.user.userName : "GUEST",
-				data,
+				userName: ctx.meta.user && ctx.meta.user.userName ? ctx.meta.user.userName : "GUEST",
+				data
 			};
 			/** Log res */
 			const logOutput = LoggerHelper.getFormatLogGwOUT(resObj);

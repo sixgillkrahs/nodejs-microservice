@@ -1,0 +1,66 @@
+{
+	"PAYOUT_REQ_ID_MISSING": {
+		"CODE": 1000,
+		"MESSAGE": {
+			"VI": "Thiếu tham số mã rút tiền",
+			"EN": "Payout reqId missing"
+		},
+		"STATUS_CODE": 400
+	},
+	"PAYOUT_REQUEST_NOT_FOUND": {
+		"CODE": 1000,
+		"MESSAGE": {
+			"VI": "Không tìm thấy yêu cầu rút tiền",
+			"EN": "Payout request not found"
+		},
+		"STATUS_CODE": 400
+	},
+	"MERCHANT_NOT_FOUND": {
+		"CODE": 1000,
+		"MESSAGE": {
+			"VI": "Không tìm thấy thông tin merchant",
+			"EN": "Merchant not found"
+		},
+		"STATUS_CODE": 400
+	},
+	"MERCHANT_USER_INFO_NOT_FOUND": {
+		"CODE": 1000,
+		"MESSAGE": {
+			"VI": "Không tìm thấy thông tin về người dùng merchant",
+			"EN": "Merchant user not found"
+		},
+		"STATUS_CODE": 400
+	},
+	"MERCHANT_GREEN_WALLET_NOT_FOUND": {
+		"CODE": 1000,
+		"MESSAGE": {
+			"VI": "Merchant không có tài khoản doanh thu sau đối soát",
+			"EN": "Merchant account revenue not found"
+		},
+		"STATUS_CODE": 400
+	},
+	"SYS_GREEN_WALLET_NOT_FOUND": {
+		"CODE": 1000,
+		"MESSAGE": {
+			"VI": "Lỗi không tìm thấy thông tin tài khoản hệ thống",
+			"EN": "Sys green account revenue not found"
+		},
+		"STATUS_CODE": 400
+	},
+	"INSUFFICIENT_BALANCE": {
+		"CODE": 1000,
+		"MESSAGE": {
+			"VI": "Số dư không đủ",
+			"EN": "Insufficient balance"
+		},
+		"STATUS_CODE": 400
+	},
+	"REQUEST_APPROVED": {
+		"CODE": 1000,
+		"MESSAGE": {
+			"VI": "Yêu cầu đã được duyệt",
+			"EN": "Payout request was approved"
+		},
+		"STATUS_CODE": 400
+	}
+}

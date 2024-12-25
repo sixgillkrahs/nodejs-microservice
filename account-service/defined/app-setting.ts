@@ -1,14 +1,17 @@
-import { BUSSINESS_CODES } from './bussiness-codes';
 import COMMON_CODES from "./common-codes";
+import RESPONSE_CODE from "./response.code.json";
 
 const DB_COLLECTION = {
-    ACCOUNT: "accounts",
+	ACCOUNTS: "accounts",
 };
 
-const RESPONSE_CODES = { BUSSINESS: BUSSINESS_CODES, COMMON: COMMON_CODES };
+const RESPONSE_CODES = {
+	COMMON: COMMON_CODES,
+	ERROR: RESPONSE_CODE.ERROR,
+};
 
 const LANGUAGE_DEFAULT: string = "vi";
 
 const SUCCESS_CODE = 1;
 
-export { DB_COLLECTION, LANGUAGE_DEFAULT, BUSSINESS_CODES, SUCCESS_CODE, RESPONSE_CODES };
+export { DB_COLLECTION, LANGUAGE_DEFAULT, SUCCESS_CODE, RESPONSE_CODES };

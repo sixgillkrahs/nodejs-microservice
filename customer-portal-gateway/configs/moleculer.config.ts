@@ -1,9 +1,10 @@
+"use strict";
 import os from "os";
-import { BrokerOptions, Errors, MetricRegistry } from "moleculer";
+import {BrokerOptions, Errors, MetricRegistry, ServiceBroker} from "moleculer";
 
 const brokerConfig: BrokerOptions = {
-	namespace: "default",
-	nodeID: os.hostname(),
+	namespace: process.env.NAMESPACE || "GOOPAY-CORE",
+	nodeID: `${process.env.SERVICE_NAME}-${(process.env.NODEID ? process.env.NODEID : "") + os.hostname().toLowerCase()}`,
 	metadata: {},
 	logger: [
 		{
@@ -14,23 +15,22 @@ const brokerConfig: BrokerOptions = {
 				moduleColors: true,
 				formatter: "full",
 				objectPrinter: null,
-				autoPadding: true,
-			},
-		},
+				autoPadding: true
+			}
+		}
 	],
 	logLevel: "info",
 	transporter: process.env.NATS,
-	cacher: "redis",
+	cacher: null,
 	serializer: "JSON",
-	requestTimeout: 10 * 60 * 60 * 1000,
+	requestTimeout: 0,
 	retryPolicy: {
 		enabled: false,
 		retries: 5,
 		delay: 100,
 		maxDelay: 1000,
 		factor: 2,
-		check: (err: Errors.MoleculerError | Error) =>
-			err instanceof Errors.MoleculerError && !!err.retryable,
+		check: (err: Errors.MoleculerError) => err && !!err.retryable
 	},
 	maxCallLevel: 100,
 	heartbeatInterval: 10,
@@ -38,12 +38,12 @@ const brokerConfig: BrokerOptions = {
 	contextParamsCloning: false,
 	tracking: {
 		enabled: false,
-		shutdownTimeout: 5000,
+		shutdownTimeout: 5000
 	},
 	disableBalancer: false,
 	registry: {
 		strategy: "RoundRobin",
-		preferLocal: true,
+		preferLocal: true
 	},
 	circuitBreaker: {
 		enabled: false,
@@ -51,29 +51,28 @@ const brokerConfig: BrokerOptions = {
 		minRequestCount: 20,
 		windowTime: 60,
 		halfOpenTime: 10 * 1000,
-		check: (err: Errors.MoleculerError | Error) =>
-			err instanceof Errors.MoleculerError && err.code >= 500,
+		check: (err: Errors.MoleculerError) => err && err.code >= 500
 	},
 	bulkhead: {
 		enabled: false,
 		concurrency: 10,
-		maxQueueSize: 100,
+		maxQueueSize: 100
 	},
 	validator: true,
-	errorHandler: undefined,
+	errorHandler: null,
 	metrics: {
 		enabled: false,
 		reporter: {
 			type: "Prometheus",
 			options: {
-				port: process.env.METRICS_PORT,
-				path: "/metrics",
-				defaultLabels: (registry: MetricRegistry) => ({
-					namespace: registry.broker.namespace,
-					nodeID: registry.broker.nodeID,
-				}),
-			},
-		},
+					port: process.env.METRICS_PORT,
+						path: "/metrics",
+						defaultLabels: (registry: MetricRegistry) => ({
+						namespace: registry.broker.namespace,
+						nodeID: registry.broker.nodeID
+					})
+				}
+		}
 	},
 	tracing: {
 		enabled: false,
@@ -81,18 +80,27 @@ const brokerConfig: BrokerOptions = {
 			type: "Jaeger",
 			options: {
 				endpoint: null,
-				host: "127.0.0.1",
-				port: 6832,
+				host: process.env.TRACING_HOST,
+				port: process.env.TRACING_PORT,
 				sampler: {
 					type: "Const",
-					options: {},
+					options: {}
 				},
 				tracerOptions: {},
-				defaultTags: null,
-			},
-		},
+				defaultTags: null
+			}
+		}
 	},
 	middlewares: [],
+	// replCommands: null,
+	internalServices: false
+	/*
+	// Called after broker created.
+	created : (broker: ServiceBroker): void => {},
+	// Called after broker started.
+	started: async (broker: ServiceBroker): Promise<void> => {},
+	stopped: async (broker: ServiceBroker): Promise<void> => {},
+	 */
 };
 
 export = brokerConfig;

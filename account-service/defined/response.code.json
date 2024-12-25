@@ -1,0 +1,21 @@
+{
+	"ERROR": {
+		"POLICY_VIOLATION": {
+			"CODE": 2101,
+			"MESSAGE": {
+				"VI": "Vi phạm chính sách của hệ thống.",
+				"EN": "Violation of system's policies."
+			},
+			"STATUS_CODE": 400
+		},
+		"POLICY_VIOLATION_DEFAULT": {
+			"CODE": 2101,
+			"MESSAGE": {
+			  "VI": "Có lỗi xảy ra trong quá trình xử lý.",
+			  "EN": "An error occurred during processing."
+			},
+			"STATUS_CODE": 400
+	  
+		  }
+	}
+}

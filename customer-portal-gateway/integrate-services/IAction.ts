@@ -1,11 +1,11 @@
-import { Context } from "moleculer";
+import {Context} from "moleculer";
 
 interface IAction {
-	setting: object;
-	handlerObj: {
-		handler(ctx: Context): any;
-	};
-	getAction(): any;
+  setting: object;
+  handlerObj: {
+    handler(ctx: Context);
+  };
+  getAction(): any;
 }
 
 export = IAction;

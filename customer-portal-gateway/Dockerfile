@@ -1,31 +1,21 @@
-FROM node:16 as build
-
-WORKDIR /tmp/app
-
-# Install dependencies
-COPY package.json package-lock.json ./
-RUN npm ci --silent
-
-# Copy source
+FROM public.ecr.aws/docker/library/node:20-alpine3.20 AS builder
+ARG service_name
+ENV service_name=$service_name
+LABEL stage=${service_name}
+WORKDIR /code
 COPY . .
-
-# Build
+COPY package.json ./
+RUN npm install --force
+# COPY all the files from Current Directory into the Container
 RUN npm run build
 
-# -------------------
-FROM node:16-alpine
+FROM public.ecr.aws/docker/library/alpine:latest
+ARG service_name
+ENV service_name=$service_name
+COPY --from=builder /code/dist /app/admin-portal-gateway
+#COPY --from=builder /code/revision.txt /app/${service_name}
+COPY --from=builder /code/node_modules /app/admin-portal-gateway/node_modules
 
 WORKDIR /app
-
-# Copy source
-COPY . .
-
-# Copy built files
-COPY --from=build /tmp/app/dist .
-
-# Build and cleanup
-ENV NODE_ENV=production
-RUN npm ci --omit=dev
-
-# Start server
-CMD ["node", "./node_modules/moleculer/bin/moleculer-runner.js"]
+RUN ls /app/admin-portal-gateway > server.log && echo "Container is successfully started!" >> server.log
+CMD ["tail","-f","server.log"]

@@ -1,9 +1,10 @@
 import { Context, LoggerInstance } from "moleculer";
 import { MainProcess, Response } from "../data-transfers";
 import { INTERNAL_CODES, STATE } from "goopay-library/defined/state-code";
-import { AccountModel } from "../model";
+import { AccountModel } from "../models";
 import { RequestHelper, ResponseHelper } from "goopay-library/helpers";
 import { AccountEntity } from "../data-transfers/entities";
+import { ACTIVE } from "../constants/account.state";
 
 class AccountLogic {
 	private readonly accountModel: AccountModel;
@@ -30,6 +31,12 @@ class AccountLogic {
 				password: password,
 				isActive: true,
 				isVerified: false,
+				isDelete: false,
+				passwordHistory: {
+					password: password,
+					createdAt: new Date(),
+				},
+				state: ACTIVE,
 				createdAt: new Date(),
 			};
 

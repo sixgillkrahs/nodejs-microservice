@@ -1,3 +1,4 @@
+import { IncomingMessage, ServerResponse } from "http";
 import { RequestHelper, ResponseHelper } from "goopay-library/helpers";
 
 class BaseRouting {
@@ -11,11 +12,10 @@ class BaseRouting {
 				JSON.stringify({
 					code: 405,
 					message: "Method not allowed",
-				}),
+				})
 			);
 		}
 	}
-
 	protected checkNoSqlInjection(req, res): void {
 		/** Check valid params input */
 		const paramCheck = RequestHelper.sanitizeParam(req);
@@ -26,7 +26,7 @@ class BaseRouting {
 				JSON.stringify({
 					code: 400,
 					message: "Bad request",
-				}),
+				})
 			);
 		}
 	}
