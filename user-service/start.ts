@@ -3,14 +3,14 @@ import paginate from "mongoose-paginate-v2";
 import MongoDb from "./dbHandler/mongo";
 import { trackingIn, trackingOut } from "./middlewares";
 import { SVC_ENV } from "./svc-env";
-import { UserAuthModel } from "./models";
-import { AuthLogic, UserAuthLogic } from "./logic";
+import { UserModel } from "./models";
+import { UserLogic } from "./logic";
 
-const ServiceName = "auth-service";
-const ServicePort = 5003;
+const ServiceName = "user-service";
+const ServicePort = 5004;
 
-class AuthService extends Service {
-  private userAuthModel: UserAuthModel;
+class UserService extends Service {
+  private userModel: UserModel;
 
   public constructor(broker: ServiceBroker) {
     super(broker);
@@ -27,13 +27,9 @@ class AuthService extends Service {
           desc: "Check service status ready working",
           handler: (ctx) => "OK",
         },
-        createUserAuth: (ctx) => this.userAuthLogic.createUserAuth(ctx),
-
-        //auth
-        authenticate: (ctx) => this.authLogic.authenticate(ctx),
-        authorize: (ctx) => this.authLogic.authorize(ctx),
-        signin: (ctx) => this.authLogic.signin(ctx),
-        register: (ctx) => this.authLogic.register(ctx),
+        //user
+        createUser: (ctx) => this.userLogic.createUser(ctx),
+        getUser: (ctx) => this.userLogic.getUser(ctx),
       },
       events: {},
       methods: {},
@@ -77,14 +73,9 @@ class AuthService extends Service {
       /** Init models and install plugins use for model*/
       const plugins = [paginate];
       const models = {
-        UserAuthModel: new UserAuthModel(this.logger, dbConnection, plugins),
+        UserModel: new UserModel(this.logger, dbConnection, plugins),
       };
-      this.userAuthLogic = new UserAuthLogic({
-        logger: this.logger,
-        dbConnection,
-        models,
-      });
-      this.authLogic = new AuthLogic({
+      this.userLogic = new UserLogic({
         logger: this.logger,
         dbConnection,
         models,
@@ -108,4 +99,4 @@ class AuthService extends Service {
   }
 }
 
-export = AuthService;
+export = UserService;

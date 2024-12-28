@@ -10,9 +10,7 @@ export const REQUIRED_KEYS = [
   "REDIS_PASS",
   "REDIS_DB",
 
-  "MERCHANT_SERVICE",
-  "CUSTOMER_SERVICE",
-  "USER_SERVICE",
+  "AUTH_SERVICE",
 
   "JWT_KEY",
 ];
@@ -27,9 +25,7 @@ interface IEnvironmentField {
   readonly REDIS_PASS: string;
   readonly REDIS_DB: string;
 
-  readonly MERCHANT_SERVICE: string;
-  readonly CUSTOMER_SERVICE: string;
-  readonly USER_SERVICE: string;
+  readonly AUTH_SERVICE: string;
 
   readonly JWT_KEY: string;
 }

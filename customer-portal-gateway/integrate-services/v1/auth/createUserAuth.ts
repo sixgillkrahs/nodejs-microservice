@@ -2,16 +2,15 @@ import { Context } from "moleculer";
 import IAction from "../../IAction";
 import { SVC_ENV } from "../../../svc-env";
 
-class GetAllArticlePaging implements IAction {
+class CreateUserAuth implements IAction {
 	public readonly setting: object = {
-		authenticate: true,
+		authenticate: false,
 		authorization: false,
-		langFields: ["title", "content", "contentAction.data.buttonName"],
 	};
 	public readonly handlerObj = {
 		async handler(ctx: Context) {
 			const resp = await ctx.call(
-				`${SVC_ENV.get().ACCOUNT_SERVICE}.getAllAccount`,
+				`${SVC_ENV.get().AUTH_SERVICE}.createUserAuth`,
 				ctx.params,
 				{ meta: ctx.meta }
 			);
@@ -23,4 +22,4 @@ class GetAllArticlePaging implements IAction {
 	}
 }
 
-export = GetAllArticlePaging;
+export = CreateUserAuth;

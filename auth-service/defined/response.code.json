@@ -1,0 +1,102 @@
+{
+	"OTP_LOGIN_FAILED_MANY": {
+		"CODE": 2011,
+		"MESSAGE": {
+			"VI": "Tài khoản đã bị khóa do nhập sai OTP nhiều lần. Vui lòng liên hệ bộ phận CSKH để được trợ giúp!",
+			"EN": "You have entered the wrong OTP many times, temporarily unable to log in for 7 days. Please contact Customer Service at xxxxxxx for support."
+		}
+	},
+	"LOGIN_FAILED_MANY": {
+		"CODE": 2012,
+		"MESSAGE": {
+			"VI": "Tài khoản đã bị khóa do đăng nhập sai mật khẩu nhiều lần. Vui lòng liên hệ bộ phận CSKH để được trợ giúp!",
+			"EN": "You have entered the wrong Password many times, temporarily unable to log in for 7 days. Please contact Customer Service at xxxxxxx for support."
+		}
+	},
+
+	"NEW_PASSWORD_SAME_OLD_PASSWORD": {
+		"CODE": 1101,
+		"MESSAGE": {
+			"VI": "Vui lòng tạo mật khẩu khác mật khẩu hiện tại",
+			"EN": "PLEASE INPUT NEW PASSWORD DIFF CURRENT PASSWORD"
+		}
+	},
+	"USER_IS_CASHIER_BUT_EMPTY_DATA": {
+		"CODE": 1111,
+		"MESSAGE": {
+			"VI": "Thông tin cashier của bạn không tìm thấy",
+			"EN": "Your information cashier not found"
+		}
+	},
+	"CASHIER_MISSING_WORKING_TIMES": {
+		"CODE": 1111,
+		"MESSAGE": {
+			"VI": "Bạn chưa thiết lập giờ làm việc",
+			"EN": "Your working time is not set"
+		}
+	},
+	"CASHIER_WORKING_TIMES_NOT_MATCH": {
+		"CODE": 1111,
+		"MESSAGE": {
+			"VI": "Khoảng thời gian làm việc của bạn chưa đến",
+			"EN": "Current time is not your working time"
+		}
+	},
+	"CASHIER_STORE_IS_NOT_ACTIVE": {
+		"CODE": 1114,
+		"MESSAGE": {
+			"VI": "Cửa hàng bạn làm việc chưa được kích hoạt",
+			"EN": "Your outlet where you are working was not active"
+		}
+	},
+	"CASHIER_STORE_IS_DELETE": {
+		"CODE": 1115,
+		"MESSAGE": {
+			"VI": "Cửa hàng bạn làm việc của bạn đã bị đình chỉ hoặc không tồn tại",
+			"EN": "Your outlet where you are working was suspend or not existed"
+		}
+	},
+	"CASHIER_IS_NOT_ACTIVE": {
+		"CODE": 1116,
+		"MESSAGE": {
+			"VI": "Tài khoản làm việc của bạn chưa được kích hoạt",
+			"EN": "Your account which you are working was not active"
+		}
+	},
+	"CASHIER_IS_DELETE": {
+		"CODE": 1116,
+		"MESSAGE": {
+			"VI": "Tài khoản làm việc của bạn đã bị đình chỉ",
+			"EN": "Your account which you are working was suspend"
+		}
+	},
+	"YOUR_AUTH_NOT_FOUND": {
+		"CODE": 1117,
+		"MESSAGE": {
+			"VI": "Thông tin đăng nhập chứng thực thất bại",
+			"EN": "Account signin authenticate failed"
+		}
+	},
+	"NEW_PASSWORD_EXISTED_IN_HISTORY": {
+		"CODE": 1118,
+		"MESSAGE": {
+			"VI": "Bạn đã đặt mật khẩu này trước đó, vui lòng kiểm tra lại!",
+			"EN": "You have set this password before, please check again!"
+		}
+	},
+	"PASSWORD_EXPIRED": {
+		"CODE": 1119,
+		"MESSAGE": {
+			"VI": "Mật khẩu hết hiệu lực, vui lòng reset lại mật khẩu hoặc liên hệ Goopay để được hỗ trợ",
+			"EN": "Password is expired, please reset your password or contact Goopay for support"
+		}
+	},
+	"PASSWORD_ABOUT_TO_EXPIRED": {
+		"CODE": 1120,
+		"MESSAGE": {
+			"VI": "Mật khẩu sắp hết hiệu lực, vui lòng cập nhật lại mật khẩu hoặc liên hệ Goopay để được hỗ trợ",
+			"EN": "Your password is about to expire. Please update your password or contact Goopay for support"
+		}
+	}
+
+}

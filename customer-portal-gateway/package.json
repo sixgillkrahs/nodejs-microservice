@@ -1,5 +1,5 @@
 {
-  "name": "admin-portal-gateway",
+  "name": "customer-portal-gateway",
   "version": "1.0.0",
   "description": "My Moleculer-based microservices project",
   "scripts": {

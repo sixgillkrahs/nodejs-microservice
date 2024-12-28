@@ -9,15 +9,13 @@ import { redis } from "./caching";
 import { RoutingInterceptor } from "./interceptors/";
 import { SocketProcess, socketEventHandle } from "./socket-io";
 import { SVC_ENV } from "./svc-env";
-import BusinessRequestLogic from "./logics/business-request.logic";
 
-const ServiceName = "admin-portal-gateway";
-const ServicePort = 8700;
+const ServiceName = "customer-portal-gateway";
+const ServicePort = 6000;
 
 class GoopayPortalGateway extends Service {
 	private readonly interceptorRoute: RoutingInterceptor;
 	private readonly socketProcess: SocketProcess;
-	private businessRequestLogic: BusinessRequestLogic;
 
 	public constructor(broker: ServiceBroker) {
 		super(broker);
@@ -132,17 +130,7 @@ class GoopayPortalGateway extends Service {
 						authentication: true,
 						authorization: false,
 						autoAliases: true,
-						aliases: {
-							"GET /monthlyReconcileReport"(req, res) {
-								this.merchantReconcileReportLogic.exportReport(req, res);
-							},
-							"GET /exportNapasReconcile"(req, res) {
-								this.napasReconcileReportLogic.exportReport(req, res);
-							},
-							"GET /templateBusiness"(req, res) {
-								this.businessRequestLogic.downloadTemplate(req, res);
-							},
-						},
+						aliases: {},
 						mappingPolicy: "restrict",
 						logging: true,
 						onBeforeCall(ctx, route, req, res) {
@@ -218,10 +206,6 @@ class GoopayPortalGateway extends Service {
 		/** Start socket io and processing events from client */
 		this.socketProcess.startSocket();
 		this.socketProcess.processSocket(socketEventHandle);
-		this.businessRequestLogic = new BusinessRequestLogic({
-			logger: this.logger,
-			broker: this.broker,
-		});
 		/** End socket io */
 	}
 

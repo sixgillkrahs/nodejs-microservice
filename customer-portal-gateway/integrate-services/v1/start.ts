@@ -12,6 +12,7 @@ import {
 import { RestRoute } from "../../mixins/rest-route.mixin";
 import { SVC_ENV } from "../../svc-env";
 import { ActionGetAllArticlePaging } from "./account";
+import { ActionRegister, ActionSignin } from "./auth";
 
 class IntegrateServiceV1 extends Service {
 	public constructor(public broker: ServiceBroker) {
@@ -38,13 +39,17 @@ class IntegrateServiceV1 extends Service {
 				},
 			},
 			mixins: [
-				// ARTICLE
+				// Account
 				RestRoute(
 					"GET",
 					"/article",
 					"getAllArticlePaging",
 					ActionGetAllArticlePaging
 				),
+
+				// Auth
+				RestRoute("POST", "/auth/signin", "signin", ActionSignin),
+				RestRoute("POST", "/auth/register", "register", ActionRegister),
 			],
 			meta: {
 				scalable: true,

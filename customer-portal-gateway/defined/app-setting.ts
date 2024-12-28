@@ -1,9 +1,8 @@
 import * as RESPONSE_CODES from "./response.code.json";
 import * as STATE_CODES from "./state.code.json";
-import MIME_TYPE from "./mime-type";
 
 const ROOM = {
-	CLIENT_CONNECTING: "clients-connecting"
+	CLIENT_CONNECTING: "clients-connecting",
 };
 
 const LANGUAGE_DEFAULT: string = "vi";
@@ -20,7 +19,7 @@ const WALLET_TRANS_TYPE = {
 	TRANSFER_RECEIVER: "TRANSFER_RECEIVER",
 	SELL: "SELL",
 	MERCHANT_REVENUE: "MERCHANT_REVENUE",
-	BUY: "BUY"
+	BUY: "BUY",
 };
 
 const REFUND_REQUEST_STATE = {
@@ -29,4 +28,11 @@ const REFUND_REQUEST_STATE = {
 	PROCESSING: "PROCESSING",
 };
 
-export { LANGUAGE_DEFAULT, RESPONSE_CODES, STATE_CODES, ROOM, MIME_TYPE, WALLET_TRANS_TYPE, REFUND_REQUEST_STATE };
+export {
+	LANGUAGE_DEFAULT,
+	RESPONSE_CODES,
+	STATE_CODES,
+	ROOM,
+	WALLET_TRANS_TYPE,
+	REFUND_REQUEST_STATE,
+};
