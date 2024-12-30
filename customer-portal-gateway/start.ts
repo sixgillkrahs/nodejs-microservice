@@ -50,7 +50,7 @@ class GoopayPortalGateway extends Service {
 					},
 					{
 						path: "/api",
-						whitelist: ["v1.admin-portal.*"],
+						whitelist: ["v1.customer-portal.*"],
 						use: [],
 						mergeParams: true,
 						authentication: false,

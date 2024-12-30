@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Dropdown, Menu, Navbar } from "react-daisyui";
+import { Link } from "react-router-dom";
 
 const Header: React.FC = () => {
   return (
@@ -8,7 +9,6 @@ const Header: React.FC = () => {
       dataTheme="#fff"
     >
       <Navbar.Start>
-        {/* Biểu tượng menu cho thiết bị nhỏ */}
         <Dropdown className="block lg:hidden">
           <Button tag="label" color="ghost" tabIndex={0}>
             <svg
@@ -42,7 +42,7 @@ const Header: React.FC = () => {
             <Dropdown.Item>Item 3</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
-        <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+        <Link to={"/"}>daisyUI</Link>
       </Navbar.Start>
       <Navbar.Center className="hidden lg:flex">
         <Menu horizontal className="px-1">
@@ -75,7 +75,7 @@ const Header: React.FC = () => {
       </Navbar.Center>
       <Navbar.End>
         <Button tag="a" color="ghost">
-          Login
+          <Link to={"user/login"}>Login</Link>
         </Button>
         <Button tag="a" variant="outline">
           Sign up

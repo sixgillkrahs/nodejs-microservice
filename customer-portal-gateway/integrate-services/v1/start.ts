@@ -18,7 +18,7 @@ class IntegrateServiceV1 extends Service {
 	public constructor(public broker: ServiceBroker) {
 		super(broker);
 		this.parseServiceSchema({
-			name: SVC_ENV.get().INTEGRATE_SERVICE_V1 || "admin-portal",
+			name: SVC_ENV.get().INTEGRATE_SERVICE_V1 || "customer-portal",
 			version: 1,
 			settings: {},
 			hooks: {

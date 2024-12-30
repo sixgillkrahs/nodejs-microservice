@@ -3,13 +3,14 @@ import { Outlet } from "react-router-dom";
 import { useTranslate } from "../utils";
 import {
   Badge,
+  Breadcrumbs,
   Button,
   Card,
   Dropdown,
   Indicator,
   Navbar,
 } from "react-daisyui";
-import { Header } from "../components";
+import { BreadcrumbsCustom, Header } from "../components";
 
 const MainLayout = () => {
   const translate = useTranslate();
@@ -17,6 +18,7 @@ const MainLayout = () => {
     <>
       <Header />
       <div className="lg:px-28">
+        <BreadcrumbsCustom />
         <Outlet />
       </div>
     </>
