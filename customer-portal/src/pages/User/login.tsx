@@ -1,22 +1,30 @@
-import { Form, Card, Link, Button } from "react-daisyui";
+import { Card, Link, Button } from "react-daisyui";
 import { Formik, Form as Formi } from "formik";
 import * as Yup from "yup";
 import { LoginObj } from "../../interfaces/login";
-import { FormInput } from "../../components";
+import { FormCusInput } from "../../components";
+import { login } from "../../services/user/api";
+import { useNavigate } from "react-router-dom";
+import { Link as Linkss } from "react-router-dom";
+import { HiOutlineMail } from "react-icons/hi";
+import { TbLockPassword } from "react-icons/tb";
+
+const validationSchema = Yup.object({
+  userName: Yup.string().required("Email is required").email("hhi"),
+  password: Yup.string().required("Password is required").min(6, "h"),
+});
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const initialValues: LoginObj = {
     userName: "",
     password: "",
   };
 
-  const validationSchema = Yup.object({
-    userName: Yup.string().required("Email is required").email("hhi"),
-    password: Yup.string().required("Password is required").min(6, "h"),
-  });
-
-  const handelSubmit = (values: LoginObj) => {
-    console.log(values);
+  const handelSubmit = async (values: LoginObj) => {
+    const resp = await login(values);
+    localStorage.setItem("token", resp.token);
+    navigate("/");
   };
 
   return (
@@ -32,17 +40,18 @@ const LoginPage = () => {
             {() => {
               return (
                 <Formi>
-                  <FormInput
-                    propsOrFieldName="userName"
+                  <FormCusInput
                     label="Email"
-                    name="userName"
-                    type="text"
+                    propsOrFieldName={"userName"}
+                    icon={<HiOutlineMail />}
+                    position="right"
                     placeholder="Enter your email"
                   />
-                  <FormInput
-                    propsOrFieldName="password"
+                  <FormCusInput
                     label="Password"
-                    name="password"
+                    propsOrFieldName={"password"}
+                    icon={<TbLockPassword />}
+                    position="right"
                     type="password"
                     placeholder="Enter your password"
                   />
@@ -51,13 +60,18 @@ const LoginPage = () => {
                       Forgot password?
                     </Link>
                   </label>
-                  <Form className="mt-6">
-                    <Button type="submit">Login</Button>
-                  </Form>
+                  <Button type="submit" className="w-full">
+                    Login
+                  </Button>
                   <label className="label flex justify-end">
-                    <Link href="#" className="label-text-alt" hover>
-                      I dont have a account, Sign up now!
-                    </Link>
+                    <span className="flex items-center">
+                      <p>You don't have account?</p>
+                      <p>
+                        <Link href="#" className="label-text-alt" hover>
+                          <Linkss to={"/register"}> Sign up now!</Linkss>
+                        </Link>
+                      </p>
+                    </span>
                   </label>
                 </Formi>
               );

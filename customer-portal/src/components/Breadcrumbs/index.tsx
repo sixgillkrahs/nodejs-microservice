@@ -1,5 +1,5 @@
 import { Breadcrumbs } from "react-daisyui";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const BreadcrumbsCustom = () => {
   const location = useLocation();
@@ -7,12 +7,16 @@ const BreadcrumbsCustom = () => {
 
   return (
     <Breadcrumbs>
-      <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
+      <Breadcrumbs.Item href="/">
+        <Link to={"/"}>Home</Link>
+      </Breadcrumbs.Item>
       {pathnames.map((name, index) => {
         const routeTo = `/${pathnames.slice(0, index + 1).join("/")}`;
         return (
           <Breadcrumbs.Item href={routeTo}>
-            {name.charAt(0).toUpperCase() + name.slice(1)}
+            <Link to={routeTo}>
+              {name.charAt(0).toUpperCase() + name.slice(1)}
+            </Link>
           </Breadcrumbs.Item>
         );
       })}

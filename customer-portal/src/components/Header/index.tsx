@@ -75,10 +75,10 @@ const Header: React.FC = () => {
       </Navbar.Center>
       <Navbar.End>
         <Button tag="a" color="ghost">
-          <Link to={"user/login"}>Login</Link>
+          <Link to={"/login"}>Login</Link>
         </Button>
         <Button tag="a" variant="outline">
-          Sign up
+          <Link to={"/register"}>Sign up</Link>
         </Button>
       </Navbar.End>
     </Navbar>

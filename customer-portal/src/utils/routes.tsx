@@ -8,6 +8,7 @@ import MainLayout from "../layouts/MainLayout";
 import HomePage from "../pages/Home";
 import NoFoundPage from "../pages/404";
 import LoginPage from "../pages/User/login";
+import RegisterPage from "../pages/User/register";
 
 const childRoutes: RouteObject[] = [
   {
@@ -15,8 +16,12 @@ const childRoutes: RouteObject[] = [
     element: <HomePage />,
   },
   {
-    path: "/user/login",
+    path: "/login",
     element: <LoginPage />,
+  },
+  {
+    path: "/register",
+    element: <RegisterPage />,
   },
 ];
 
