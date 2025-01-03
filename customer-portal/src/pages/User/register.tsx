@@ -1,83 +1,66 @@
-import { Card, Link, Button, Input } from "react-daisyui";
-import { Formik, Form as Formi } from "formik";
+import { Formik, Form as Formi, FormikHelpers } from "formik";
 import * as Yup from "yup";
-import React from "react";
+import React, { useState } from "react";
 import { Link as Linkss } from "react-router-dom";
-import { FormCusInput, FormInput } from "../../components";
-import { HiOutlineMail } from "react-icons/hi";
-import { FormRadio } from "../../components";
 import { gender } from "../../constants/user";
+import { RegisterObj } from "../../interfaces/register";
+import { register } from "../../services/user/api";
 
 const validationSchema = Yup.object({
-  userName: Yup.string().required("Email is required").email("hhi"),
-  password: Yup.string().required("Password is required").min(6, "h"),
+  userName: Yup.string()
+    .required("Email is required")
+    .email("Invalid email format"),
+
+  password: Yup.string()
+    .required("Password is required")
+    .min(6, "Password must be at least 6 characters long"),
+
+  fullName: Yup.string()
+    .required("Full name is required")
+    .min(5, "Full name must be at least 5 characters long")
+    .max(50, "Full name must not exceed 50 characters"),
+
+  phone: Yup.string()
+    .required("Phone number is required")
+    .min(10, "Phone number must be at least 10 characters long"),
+
+  gender: Yup.string().required("Gender is required"),
+
+  dob: Yup.date()
+    .required("Date of birth is required")
+    .max(new Date(), "Date of birth cannot be in the future"),
 });
 
 const RegisterPage = () => {
-  const initialValues = {};
+  const [alerts, setAlerts] = useState<any[]>([
+    {
+      text: "This is a custom alert!",
+      status: "info",
+    },
+  ]);
+  const handleAddToast = () => {
+    setAlerts((alerts) => [
+      ...alerts,
+      {
+        text: "New message arrived.",
+        status: "success",
+      },
+    ]);
+  };
+  const initialValues = {
+    userName: "",
+    password: "",
+    fullName: "",
+    phone: "",
+    gender: "",
+    dob: "",
+  };
 
-  const handelSubmit = async () => {};
-  return (
-    <Card className="flex-shrink-0 w-full shadow-2xl bg-base-100 max-w-2xl">
-      <Card.Body>
-        <p className="text-center text-4xl font-bold py-6">Register</p>
-        <Formik
-          onSubmit={handelSubmit}
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-        >
-          {() => {
-            return (
-              <Formi>
-                <FormInput
-                  propsOrFieldName="fullName"
-                  label="Full Name"
-                  name="fullName"
-                  type="text"
-                  placeholder="Enter your full name"
-                />
-                <FormInput
-                  propsOrFieldName="phone"
-                  label="Phone"
-                  name="phone"
-                  type="text"
-                  placeholder="Enter your phone"
-                />
-                <FormInput
-                  propsOrFieldName="userName"
-                  label="Email"
-                  name="userName"
-                  type="text"
-                  placeholder="Enter your email"
-                />
-                <FormInput
-                  propsOrFieldName="dob"
-                  label="Date of birthday"
-                  name="dob"
-                  type="date"
-                />
-                <FormRadio
-                  label="Gender"
-                  propsOrFieldName={"gender"}
-                  option={gender}
-                />
-                <FormInput
-                  propsOrFieldName="password"
-                  label="Password"
-                  name="password"
-                  type="password"
-                  placeholder="Enter your password"
-                />
-                <Button type="submit" className="w-full">
-                  Login
-                </Button>
-              </Formi>
-            );
-          }}
-        </Formik>
-      </Card.Body>
-    </Card>
-  );
+  const handelSubmit = async (values: RegisterObj) => {
+    const resp = await register(values);
+    console.log(resp);
+  };
+  return <></>;
 };
 
 export default RegisterPage;

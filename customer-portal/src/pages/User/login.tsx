@@ -1,13 +1,9 @@
-import { Card, Link, Button } from "react-daisyui";
 import { Formik, Form as Formi } from "formik";
 import * as Yup from "yup";
 import { LoginObj } from "../../interfaces/login";
-import { FormCusInput } from "../../components";
 import { login } from "../../services/user/api";
 import { useNavigate } from "react-router-dom";
 import { Link as Linkss } from "react-router-dom";
-import { HiOutlineMail } from "react-icons/hi";
-import { TbLockPassword } from "react-icons/tb";
 
 const validationSchema = Yup.object({
   userName: Yup.string().required("Email is required").email("hhi"),
@@ -29,7 +25,7 @@ const LoginPage = () => {
 
   return (
     <div className="pt-9  justify-center flex">
-      <Card className="flex-shrink-0 w-full shadow-2xl bg-base-100 max-w-2xl">
+      {/* <Card className="flex-shrink-0 w-full shadow-2xl bg-base-100 max-w-2xl">
         <Card.Body>
           <p className="text-center text-4xl font-bold py-6">Login</p>
           <Formik
@@ -78,7 +74,7 @@ const LoginPage = () => {
             }}
           </Formik>
         </Card.Body>
-      </Card>
+      </Card> */}
     </div>
   );
 };

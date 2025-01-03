@@ -1,27 +1,17 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { useTranslate } from "../utils";
-import {
-  Badge,
-  Breadcrumbs,
-  Button,
-  Card,
-  Dropdown,
-  Indicator,
-  Navbar,
-} from "react-daisyui";
-import { BreadcrumbsCustom, Header } from "../components";
+import { Breadcrums, Header } from "../components";
+import { Box } from "@mui/material";
 
 const MainLayout = () => {
-  const translate = useTranslate();
   return (
-    <>
+    <div>
       <Header />
-      <div className="lg:px-28">
-        <BreadcrumbsCustom />
+      <Box sx={{ paddingTop: 4, paddingX: 10 }}>
+        <Breadcrums />
         <Outlet />
-      </div>
-    </>
+      </Box>
+    </div>
   );
 };
 

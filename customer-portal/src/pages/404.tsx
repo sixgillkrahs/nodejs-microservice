@@ -1,4 +1,4 @@
-import { Button } from "react-daisyui";
+import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 
 const NoFoundPage = () => {
