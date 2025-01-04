@@ -1,4 +1,4 @@
-export const white = {
+const white = {
   50: "#ffffff",
   100: "#f2f2f2",
   200: "#e6e6e6",
@@ -11,7 +11,7 @@ export const white = {
   900: "#7f7f7f",
 };
 
-export const black = {
+const black = {
   50: "#f2f2f2",
   100: "#cccccc",
   200: "#999999",
@@ -23,3 +23,25 @@ export const black = {
   800: "#0d0d0d",
   900: "#000000",
 };
+
+const deepNavy = {
+  50: "#000929",
+};
+
+const orangeRed = {
+  50: "#FF6838",
+};
+
+const mediumSlateBlue = {
+  50: "#7065F0",
+};
+
+const Color = {
+  white,
+  black,
+  deepNavy,
+  orangeRed,
+  mediumSlateBlue,
+};
+
+export default Color;

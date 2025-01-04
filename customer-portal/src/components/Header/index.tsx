@@ -17,6 +17,7 @@ import AdbIcon from "@mui/icons-material/Adb";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { Link } from "react-router-dom";
 
 const pages = [
   "Analyze a Deal",
@@ -57,7 +58,7 @@ const Header = () => {
   return (
     <Fragment>
       <AppBar position="sticky">
-        <Toolbar>
+        <Toolbar sx={{ mx: { xs: 0, md: 3 } }}>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant="h5"
@@ -137,7 +138,7 @@ const Header = () => {
                   size="small"
                   color="secondary"
                   onClick={handleCloseNavMenu}
-                  sx={{ my: 2, display: "block" }}
+                  sx={{ my: 2, mx: 2, display: "block", textTransform: "none" }}
                 >
                   {page}
                 </Button>
@@ -152,7 +153,7 @@ const Header = () => {
                   aria-haspopup="true"
                   aria-controls={open ? "demo-customized-menu" : undefined}
                   onClick={handleCloseNavMenu}
-                  sx={{ my: 2 }}
+                  sx={{ my: 2, textTransform: "none" }}
                   endIcon={<KeyboardArrowDownIcon />}
                 >
                   {page}
@@ -163,10 +164,10 @@ const Header = () => {
           <Box
             sx={{ flexGrow: 0, display: "flex", gap: 2, alignItems: "center" }}
           >
-            <Badge color="info" variant="dot" overlap="circular">
-              <NotificationsNoneIcon />
+            <Badge color="success" variant="dot" overlap="circular">
+              <NotificationsNoneIcon color="warning" />
             </Badge>
-            <Tooltip title="Open settings">
+            {/* <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
@@ -194,7 +195,23 @@ const Header = () => {
                   </Typography>
                 </MenuItem>
               ))}
-            </Menu>
+            </Menu> */}
+            <Button
+              color="warning"
+              disableRipple
+              sx={{ textTransform: "none" }}
+            >
+              <Link to={"/login"}>Login</Link>
+            </Button>
+            <Button
+              color="warning"
+              sx={{
+                textTransform: "none",
+              }}
+              variant="outlined"
+            >
+              <Link to={"/sign-up"}>Sign up</Link>
+            </Button>
           </Box>
         </Toolbar>
       </AppBar>

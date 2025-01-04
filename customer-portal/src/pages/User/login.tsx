@@ -4,6 +4,7 @@ import { LoginObj } from "../../interfaces/login";
 import { login } from "../../services/user/api";
 import { useNavigate } from "react-router-dom";
 import { Link as Linkss } from "react-router-dom";
+import { Card } from "@mui/material";
 
 const validationSchema = Yup.object({
   userName: Yup.string().required("Email is required").email("hhi"),
@@ -25,8 +26,8 @@ const LoginPage = () => {
 
   return (
     <div className="pt-9  justify-center flex">
-      {/* <Card className="flex-shrink-0 w-full shadow-2xl bg-base-100 max-w-2xl">
-        <Card.Body>
+      <Card className="flex-shrink-0 w-full shadow-2xl bg-base-100 max-w-2xl">
+        {/* <Card.Body>
           <p className="text-center text-4xl font-bold py-6">Login</p>
           <Formik
             onSubmit={handelSubmit}
@@ -73,8 +74,8 @@ const LoginPage = () => {
               );
             }}
           </Formik>
-        </Card.Body>
-      </Card> */}
+        </Card.Body> */}
+      </Card>
     </div>
   );
 };

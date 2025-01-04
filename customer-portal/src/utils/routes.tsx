@@ -3,29 +3,37 @@ import {
   RouterProvider,
   createBrowserRouter,
   RouteObject,
+  IndexRouteObject,
 } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import HomePage from "../pages/Home";
 import NoFoundPage from "../pages/404";
 import LoginPage from "../pages/User/login";
 import RegisterPage from "../pages/User/register";
+import { RouteObjectCus } from "../interfaces/base";
 
-const childRoutes: RouteObject[] = [
+export const childRoutes: RouteObjectCus[] = [
   {
-    path: "",
+    index: true,
+    name: "Home Page",
+    path: "/",
     element: <HomePage />,
   },
   {
+    index: true,
     path: "/login",
+    name: "Login",
     element: <LoginPage />,
   },
   {
-    path: "/register",
+    index: true,
+    path: "/sign-up",
+    name: "Sign up",
     element: <RegisterPage />,
   },
 ];
 
-const routerRoot: RouteObject[] = [
+export const routerRoot: RouteObject[] = [
   {
     path: "/",
     element: <MainLayout />,

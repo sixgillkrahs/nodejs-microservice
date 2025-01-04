@@ -4,7 +4,7 @@ import Routes from "./utils/routes";
 import { IntlProvider } from "react-intl";
 import messages from "./locales";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { lime, purple, green } from "@mui/material/colors";
+import Color from "./utils/color";
 
 const lightTheme = createTheme({
   palette: {
@@ -13,6 +13,9 @@ const lightTheme = createTheme({
     },
     secondary: {
       main: "#000",
+    },
+    warning: {
+      main: Color.orangeRed[50],
     },
   },
 });
