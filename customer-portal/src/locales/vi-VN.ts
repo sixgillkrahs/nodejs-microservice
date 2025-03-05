@@ -1,16 +1,29 @@
-import form from './vi-VN/form'
-import home from './vi-VN/home'
-import login from './vi-VN/login'
-import menu from './vi-VN/menu'
-import user from './vi-VN/user'
+const modules = import.meta.glob<Record<string, any>>("./vi-VN/*.ts", {
+  eager: true,
+});
 
+const dynamicLocale = import.meta.glob<Record<string, any>>(
+  "../pages/**/**/**/vi-VN.ts",
+  { eager: true }
+);
 
-export default {
-    "language.vn":"Tiếng Việt",
-    "language.en":"Tiếng Anh",
-    ...home,
-    ...login,
-    ...form,
-    ...menu,
-    ...user
-}
+const mergeMessages = (sources: Record<string, any>) => {
+  return Object.values(sources).reduce((acc, mod) => {
+    return { ...acc, ...mod.default };
+  }, {});
+};
+
+const messagesFromModules = Object.values(modules).reduce((acc, mod) => {
+  return { ...acc, ...mod.default };
+}, {});
+
+const messagesFromPages = mergeMessages(dynamicLocale);
+
+const translations: Record<string, string> = {
+  "language.vn": "Tiếng Việt",
+  "language.en": "Tiếng Anh",
+  ...messagesFromModules,
+  ...messagesFromPages,
+};
+
+export default translations;

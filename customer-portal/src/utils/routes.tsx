@@ -3,12 +3,11 @@ import {
   RouterProvider,
   createBrowserRouter,
   RouteObject,
-  IndexRouteObject,
 } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import HomePage from "../pages/Home";
 import NoFoundPage from "../pages/404";
-import LoginPage from "../pages/User/login";
+import LoginPage from "../pages/User/login/login";
 import RegisterPage from "../pages/User/register";
 import { RouteObjectCus } from "../interfaces/base";
 

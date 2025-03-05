@@ -1,18 +1,27 @@
-import form from './en-US/form'
-import home from './en-US/home'
-import login from './en-US/login'
-import menu from './en-US/menu'
-import user from './en-US/user'
+const modules = import.meta.glob<Record<string, any>>("./en-US/*.ts", {
+  eager: true,
+});
 
+const dynamicLocale = import.meta.glob<Record<string, any>>(
+  "../pages/**/**/**/en-US.ts",
+  { eager: true }
+);
 
+const mergeMessages = (sources: Record<string, any>) => {
+  return Object.values(sources).reduce((acc, mod) => {
+    return { ...acc, ...mod.default };
+  }, {});
+};
 
+const messagesFromModules = Object.values(modules).reduce((acc, mod) => {
+  return { ...acc, ...mod.default };
+}, {});
+
+const messagesFromPages = mergeMessages(dynamicLocale);
 
 export default {
-    "language.vn":"Vietnamese",
-    "language.en":"English",
-    ...home,
-    ...login,
-    ...form,
-    ...menu,
-    ...user
-}
+  "language.vn": "Vietnamese",
+  "language.en": "English",
+  ...messagesFromModules,
+  ...messagesFromPages,
+};
