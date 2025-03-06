@@ -14,6 +14,7 @@ const login = async (body: LoginObj) => {
 const register = async (body: RegisterObj) => {
   try {
     const resp = await fetch.post("/auth/register", body);
+    console.log(resp);
     return resp.data;
   } catch (error) {
     console.error("Error fetching data:", error);

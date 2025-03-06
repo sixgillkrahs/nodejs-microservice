@@ -22,9 +22,13 @@ import {
 import { Link } from "react-router-dom";
 import { SubmitHandler, FieldValues } from "react-hook-form";
 import { login } from "../../../services/user/api";
+import { Resp } from "../../../interfaces/base";
+import { useSnackbar } from "../../../contexts/SnackbarContext";
 
 const LoginPage = () => {
   const translate = useTranslate();
+  const { showSnackbar } = useSnackbar();
+
   const validationSchema = Yup.object({
     userName: Yup.string()
       .required(translate("login.page.validate.field.email.required"))
@@ -46,11 +50,16 @@ const LoginPage = () => {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = async (values) => {
-    const resp = await login({
-      userName: values?.email,
+    const resp: Resp = await login({
+      userName: values?.userName,
       password: values?.password,
     });
-    console.log("Dữ liệu form:", resp);
+    console.log(resp);
+    if (resp.code === 1) {
+      showSnackbar(resp.message, "success");
+    } else {
+      showSnackbar(resp.message, "error");
+    }
   };
 
   return (

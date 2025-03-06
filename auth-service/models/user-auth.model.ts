@@ -40,7 +40,7 @@ class UserAuthModel {
             createdAt: { type: Date, default: null },
           },
         ],
-        phone: { type: String },
+        phone: { type: String, required: true },
         state: { type: String },
         lockUntil: { type: Date, required: false, default: null },
         lastUpdatePassword: { type: Date, required: false, default: null },

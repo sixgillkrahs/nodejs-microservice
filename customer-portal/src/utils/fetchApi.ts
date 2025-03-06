@@ -18,4 +18,31 @@ fetch.interceptors.request.use(
   }
 );
 
+fetch.interceptors.response.use(
+  (response) => {
+    return {
+      success: true,
+      data: response.data,
+      status: response.status,
+    };
+  },
+  (error) => {
+    if (error.response) {
+      return error.response;
+    } else if (error.request) {
+      return {
+        success: false,
+        data: { message: "Không kết nối được server" },
+        status: null,
+      };
+    } else {
+      return {
+        success: false,
+        data: { message: error.message },
+        status: null,
+      };
+    }
+  }
+);
+
 export { fetch };

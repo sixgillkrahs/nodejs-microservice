@@ -10,8 +10,6 @@ const ServiceName = "auth-service";
 const ServicePort = 5003;
 
 class AuthService extends Service {
-  private userAuthModel: UserAuthModel;
-
   public constructor(broker: ServiceBroker) {
     super(broker);
     this.broker = broker;

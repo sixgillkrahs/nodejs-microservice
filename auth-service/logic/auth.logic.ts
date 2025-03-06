@@ -28,10 +28,14 @@ class AuthLogic extends BaseLogic {
         );
       }
       const filterUserAuth = {
-        email: _.toLower(userName),
         isDelete: { $ne: true },
         // isActive: true,
       };
+      if (this.isValidEmail(userName)) {
+        filterUserAuth["email"] = userName;
+      } else {
+        filterUserAuth["phone"] = userName;
+      }
       const userAuth = await this.userAuthModel.findOne(filterUserAuth);
       if (_.isEmpty(userAuth)) {
         return ResponseHelper.resFailed(
@@ -311,6 +315,10 @@ class AuthLogic extends BaseLogic {
       );
       throw new Error(error);
     }
+  }
+  public isValidEmail(email: string): boolean {
+    const emailRegex = /^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
   }
 }
 
