@@ -1,4 +1,3 @@
-import React from "react";
 import {
   RouterProvider,
   createBrowserRouter,
@@ -8,7 +7,7 @@ import MainLayout from "../layouts/MainLayout";
 import HomePage from "../pages/Home";
 import NoFoundPage from "../pages/404";
 import LoginPage from "../pages/User/login/login";
-import RegisterPage from "../pages/User/register";
+import RegisterPage from "../pages/User/register/register";
 import { RouteObjectCus } from "../interfaces/base";
 
 export const childRoutes: RouteObjectCus[] = [

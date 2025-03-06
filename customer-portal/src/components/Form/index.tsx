@@ -1,16 +1,23 @@
 import { Button } from "@mui/material";
-import React, { ReactNode } from "react";
-import { UseFormHandleSubmit, FieldValues } from "react-hook-form";
+import React, { BaseSyntheticEvent, ReactNode } from "react";
+import {
+  FieldValues,
+  SubmitHandler,
+  SubmitErrorHandler,
+} from "react-hook-form";
 import _ from "lodash";
 
 interface formProp {
-  okText?: string | any;
+  okText?: string | undefined;
 }
 
 interface FormProps {
   children: ReactNode;
-  handleSubmit: UseFormHandleSubmit<FieldValues>;
-  onSubmit: (values: any) => void;
+  handleSubmit: (
+    onValid: SubmitHandler<FieldValues>,
+    onInvalid?: SubmitErrorHandler<FieldValues> | undefined
+  ) => (e?: React.BaseSyntheticEvent) => Promise<void>;
+  onSubmit: SubmitHandler<FieldValues>;
   submiter?: ReactNode | boolean;
   formProps?: formProp;
 }
