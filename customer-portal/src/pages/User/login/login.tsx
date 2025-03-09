@@ -10,7 +10,7 @@ import {
   Grid2,
   Typography,
 } from "@mui/material";
-import { useTranslate } from "../../../utils";
+import { useMessage, useTranslate } from "../../../utils";
 import { BpCheckbox, Form, FormInput } from "../../../components";
 import { useForm } from "react-hook-form";
 import {
@@ -23,11 +23,14 @@ import { Link } from "react-router-dom";
 import { SubmitHandler, FieldValues } from "react-hook-form";
 import { login } from "../../../services/user/api";
 import { Resp } from "../../../interfaces/base";
-import { useSnackbar } from "../../../contexts/SnackbarContext";
+import { getPageQuery } from "../../../utils/utils";
+import { useNavigate } from "react-router-dom";
+import { STORAGE_KEY } from "../../../constants";
 
 const LoginPage = () => {
   const translate = useTranslate();
-  const { showSnackbar } = useSnackbar();
+  const navigate = useNavigate();
+  const { message } = useMessage();
 
   const validationSchema = Yup.object({
     userName: Yup.string()
@@ -54,11 +57,36 @@ const LoginPage = () => {
       userName: values?.userName,
       password: values?.password,
     });
-    console.log(resp);
     if (resp.code === 1) {
-      showSnackbar(resp.message, "success");
+      localStorage.setItem(
+        STORAGE_KEY || "APP_TOKEN",
+        JSON.stringify(resp?.data)
+      );
+      const urlParams = new URL(window.location.href);
+      const params = getPageQuery();
+      let { redirect } = params as { redirect: string };
+      if (redirect) {
+        const redirectUrlParams = new URL(redirect);
+        if (redirectUrlParams.origin === urlParams.origin) {
+          redirect = redirect.substr(urlParams.origin.length);
+          if (redirect.match(/^\/.*#/)) {
+            redirect = redirect.substr(redirect.indexOf("#") + 1);
+          }
+        } else {
+          window.location.href = "/";
+          return;
+        }
+        if (redirect.startsWith("/portal/")) {
+          redirect = redirect.replace("/portal", "");
+        }
+        navigate(redirect || "/", { replace: true });
+      }
+      navigate(redirect || "/", { replace: true });
     } else {
-      showSnackbar(resp.message, "error");
+      message(
+        "error",
+        resp.message || translate("login.page.message.login.error")
+      );
     }
   };
 
@@ -115,6 +143,7 @@ const LoginPage = () => {
                 errors={errors.userName}
                 required
                 sx={{ mt: 5 }}
+                autoComplete="username"
                 helperText={errors.userName?.message}
                 icon={<PermIdentity />}
                 placeholder={translate("login.page.field.placeholder.email")}
@@ -127,6 +156,7 @@ const LoginPage = () => {
                 required
                 helperText={errors.password?.message}
                 type="password"
+                autoComplete="current-password"
                 sx={{ mt: 2 }}
                 icon={<LockOutlined />}
                 placeholder={translate("login.page.field.placeholder.password")}

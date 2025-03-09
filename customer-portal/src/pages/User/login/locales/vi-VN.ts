@@ -25,4 +25,5 @@ export default {
   "login.page.validate.field.password.min": "Mật khẩu tối thiểu 8 kí tự",
   "login.page.field.placeholder.password": "Nhập mật khẩu",
   "login.page.field.placeholder.email": "Nhập email",
+  "login.page.message.login.error": "Đăng nhập không thành công",
 };

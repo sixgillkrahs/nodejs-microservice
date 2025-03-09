@@ -24,4 +24,5 @@ export default {
   "login.page.validate.field.password.min": "Password minium is 8",
   "login.page.field.placeholder.password": "Input password",
   "login.page.field.placeholder.email": "Input email",
+  "login.page.message.login.error": "Failure Login",
 };

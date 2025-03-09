@@ -9,3 +9,9 @@ export interface Resp {
   data: any;
   message: string;
 }
+
+export type RespLogin = {
+  passwordWarning: object;
+  profile: { [k: string]: any };
+  token: string;
+};

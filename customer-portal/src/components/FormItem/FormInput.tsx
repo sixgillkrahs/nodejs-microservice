@@ -1,4 +1,4 @@
-import { InputAdornment, TextField } from "@mui/material";
+import { InputAdornment, TextField, TextFieldProps } from "@mui/material";
 import React, { FC, HTMLInputTypeAttribute, ReactNode } from "react";
 import { Controller } from "react-hook-form";
 import AccountCircle from "@mui/icons-material/AccountCircle";
@@ -14,6 +14,7 @@ interface FormInputProps {
   helperText?: string;
   sx?: any;
   icon?: ReactNode;
+  autoComplete?: string | undefined;
 }
 
 const FormInput: FC<FormInputProps> = ({
@@ -27,6 +28,7 @@ const FormInput: FC<FormInputProps> = ({
   required = false,
   sx,
   icon = undefined,
+  autoComplete,
 }) => {
   return (
     <Controller
@@ -44,6 +46,7 @@ const FormInput: FC<FormInputProps> = ({
           required={required}
           fullWidth
           sx={sx}
+          autoComplete={autoComplete}
           slotProps={{
             input: {
               startAdornment: (
