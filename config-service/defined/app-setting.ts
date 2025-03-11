@@ -1,0 +1,16 @@
+const RESPONSE_CODE = require("./response.code.json");
+const DB_COLLECTION = {
+  BASE: "base",
+};
+
+const DEFAULT_LANGUAGE_CODE = "vi";
+
+const USER_TYPE = {
+  SUPER_ADMIN: "SUPER_ADMIN",
+  ORG_ADMIN: "ORG_ADMIN",
+  APP_ADMIN: "APP_ADMIN",
+  USER: "USER",
+  MOBILE_CUSTOMER: "MOBILE_CUSTOMER",
+};
+
+export { DB_COLLECTION, DEFAULT_LANGUAGE_CODE, USER_TYPE, RESPONSE_CODE };
